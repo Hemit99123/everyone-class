@@ -1,4 +1,4 @@
-const base_url = 'http://localhost:3001/post'
+const base_url = 'https://api.everyonestem.org/post'
 
 export const getPost = async (id) => {
     try {

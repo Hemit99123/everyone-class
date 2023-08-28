@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const classRoute = require('./routes/classRoute');
 const postRoute = require('./routes/postRoute')
+const indexRoute = require('./routes/indexRoute')
 const cors = require('cors')
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use(cors())
 
 // Routes
+app.use('/', indexRoute)
 app.use('/class', classRoute);
 app.use('/post', postRoute)
 

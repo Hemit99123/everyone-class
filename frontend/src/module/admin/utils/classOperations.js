@@ -1,4 +1,4 @@
-const base_url = 'http:///localhost:3001/class'
+const base_url = 'http:///api.everyonestem.org/class'
 
 export const createClass = async (title, genre, instructor, description, userSub) => {
   try {

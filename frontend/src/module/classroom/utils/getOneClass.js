@@ -1,4 +1,4 @@
-const base_url = 'http://localhost:3001/class'
+const base_url = 'https://api.everyonestem.org/class'
 
 export const getOneClass = async (id) => {
     try {
