@@ -51,11 +51,9 @@ export default function Navbar() {
               ) : (
                 <>
                   <Menu>
-                    <MenuButton>
                       <Button>
                       <HamburgerIcon />
                       </Button>
-                    </MenuButton>
                     <MenuList>
                       <MenuItem onClick={() => {window.location.href = "/admin"}}>Admin</MenuItem>
                       <MenuItem onClick={() => {window.location.href = "/donors"}}>Donors</MenuItem>
