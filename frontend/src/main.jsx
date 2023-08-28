@@ -36,7 +36,7 @@ root.render(
     domain="dev-kpnci3ue6fweb61n.us.auth0.com"
     clientId="83Xw8IxkjSvECpBGgp7ib0EWTTfs1zRM"
     authorizationParams={{
-      redirect_uri: window.location.origin,
+      redirect_uri: 'https://classroom.everyonestem.org',
     }}
     cacheLocation="localstorage"
   >
