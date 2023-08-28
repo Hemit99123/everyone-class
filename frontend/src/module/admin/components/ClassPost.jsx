@@ -187,7 +187,7 @@ const AdminClassCard = ({ classItem }) => {
           <Button flex='1' variant='ghost' leftIcon={<AddIcon />} onClick={onOpenCreateModal}>
             Create
           </Button>
-          <Button flex='1' variant='ghost' leftIcon={<CopyIcon />} onClick={() => {navigator.clipboard.writeText(`http://localhost:5173/classroom/${classItem._id}`);}}>
+          <Button flex='1' variant='ghost' leftIcon={<CopyIcon />} onClick={() => {navigator.clipboard.writeText(`/classroom/${classItem._id}`);}}>
             Copy Link
           </Button>
           <Button flex='1' variant='ghost' leftIcon={<DeleteIcon />} onClick={() => {deleteClass(classItem._id)}}>
@@ -302,18 +302,18 @@ const AdminClassCard = ({ classItem }) => {
             </Button>
             {youtubeForm &&
             <>
-                            <FormControl>
+              <FormControl>
                   <FormLabel>Youtube Video Link</FormLabel>
-                  <Input ref={youtubeLinkRef} />
-                </FormControl>
-                <Text mt={2} fontSize="sm" color="gray.600">
-                  Press this button so all the data needed is saved :)
-                </Text>
-                <Center>
-                  <Button  onClick={handleGetVideoId}>
-                    Get Youtube 
-                  </Button>
-                </Center>
+                <Input ref={youtubeLinkRef} />
+              </FormControl>
+              <Text mt={2} fontSize="sm" color="gray.600">
+                Press this button so all the data needed is saved :)
+              </Text>
+              <Center>
+                <Button  onClick={handleGetVideoId}>
+                  Get Youtube 
+                </Button>
+              </Center>
             </>
             }
           </ModalBody>
