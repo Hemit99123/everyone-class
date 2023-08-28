@@ -187,7 +187,7 @@ const AdminClassCard = ({ classItem }) => {
           <Button flex='1' variant='ghost' leftIcon={<AddIcon />} onClick={onOpenCreateModal}>
             Create
           </Button>
-          <Button flex='1' variant='ghost' leftIcon={<CopyIcon />} onClick={() => {navigator.clipboard.writeText(`/classroom/${classItem._id}`);}}>
+          <Button flex='1' variant='ghost' leftIcon={<CopyIcon />} onClick={() => {navigator.clipboard.writeText(`https://classroom.everyonestem.org/classroom/${classItem._id}`);}}>
             Copy Link
           </Button>
           <Button flex='1' variant='ghost' leftIcon={<DeleteIcon />} onClick={() => {deleteClass(classItem._id)}}>
