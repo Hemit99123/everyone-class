@@ -17,13 +17,13 @@ const ClassFeed = () => {
   const { id } = useParams();
   const [post, setPost] = useState([]);
   const [classroom, setClassroom] = useState();
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchPostData = async () => {
       try {
         const response = await getPost(id);
         setPost(response);
-        console.log(response);
       } catch (error) {
         console.error(error);
       }
@@ -33,15 +33,26 @@ const ClassFeed = () => {
       try {
         const response = await getOneClass(id);
         setClassroom(response);
-        console.log(response);
       } catch (error) {
         console.error(error);
       }
     };
 
-    fetchPostData();
-    fetchClassData();
-  }, []);
+    // Call the fetch functions and set loading state accordingly
+    Promise.all([fetchPostData(), fetchClassData()]).then(() => {
+      setLoading(false);
+    });
+  }, []); 
+  
+  if (loading) {
+    return (
+      <Container maxW="100%" p={8}>
+        <Center>
+          <Text fontSize='4xl'>Loading...</Text>
+        </Center>
+      </Container>
+    );
+  }
 
   if(!classroom) {
     return (
