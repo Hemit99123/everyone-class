@@ -43,7 +43,6 @@ export default function Navbar() {
               {!isLargerThan500 ? (
               <>
                 <Link href='/admin' alignSelf={'center'}>Admin</Link>
-                <Link href='/donors' alignSelf={'center'}>Donors</Link>
                 <Button onClick={toggleColorMode}>
                 {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
                 </Button>             
@@ -51,12 +50,11 @@ export default function Navbar() {
               ) : (
                 <>
                   <Menu>
-                      <Button>
+                      <MenuButton>
                       <HamburgerIcon />
-                      </Button>
+                      </MenuButton>
                     <MenuList>
                       <MenuItem onClick={() => {window.location.href = "/admin"}}>Admin</MenuItem>
-                      <MenuItem onClick={() => {window.location.href = "/donors"}}>Donors</MenuItem>
                       <Center>
                       <Button onClick={toggleColorMode}>
                 {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}

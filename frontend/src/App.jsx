@@ -12,7 +12,7 @@ import AuthForm from './module/main/components/AuthForm'
 import Main from './module/main/index';
 import Admin from './module/admin/index';
 import Class from './module/classroom/index';
-import Donors from './module/donors/index'
+
 const App = () => {
   const { isAuthenticated } =
     useAuth0();
@@ -22,7 +22,6 @@ const App = () => {
         <Route index element={<Main />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/classroom/:id" element={<Class />} />
-        <Route path="/donors" element={<Donors />} />
       </Route>
     )
   );
