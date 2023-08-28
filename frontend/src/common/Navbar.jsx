@@ -93,7 +93,7 @@ export default function Navbar() {
                   </Center>
                   <br />
                   <MenuDivider />
-                  <MenuItem onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
+                  <MenuItem onClick={() => logout({ logoutParams: { returnTo: 'https://classroom.everyonestem.org' } })}>
                     Logout 
                   </MenuItem>
                 </MenuList>

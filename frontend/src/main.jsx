@@ -16,7 +16,7 @@ function Auth0Wrapper() {
       if (token) {
         // Set the token in Auth0's cache
         loginWithRedirect({
-          appState: { targetUrl: 'https://classroom.everyonestem.org' }, // Redirect back to the current page after login
+          appState: { targetUrl: window.location.pathname }, // Redirect back to the current page after login
           initialScreen: 'login',
           extraState: { useRefreshTokens: true }, // This helps retain the session
         });
@@ -36,7 +36,7 @@ root.render(
     domain="dev-kpnci3ue6fweb61n.us.auth0.com"
     clientId="83Xw8IxkjSvECpBGgp7ib0EWTTfs1zRM"
     authorizationParams={{
-      redirect_uri: 'https://classroom.everyonestem.org',
+      redirect_uri: window.location.origin,
     }}
     cacheLocation="localstorage"
   >
