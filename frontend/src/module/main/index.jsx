@@ -18,16 +18,13 @@ const Main = () => {
         </Text>
         <ul style={{ paddingLeft: '20px', marginTop: '8px' }}>
           <li>
-            <Text fontSize="lg">Design custom lessons and assignments.</Text>
+            <Text fontSize="lg">Create your very own classroom</Text>
           </li>
           <li>
-            <Text fontSize="lg">Integrate multimedia content to enhance learning.</Text>
+            <Text fontSize="lg">Share it with students!</Text>
           </li>
           <li>
-            <Text fontSize="lg">Track student progress and performance.</Text>
-          </li>
-          <li>
-            <Text fontSize="lg">Facilitate collaborative projects and discussions.</Text>
+            <Text fontSize="lg">Post on the feed to share things with your students</Text>
           </li>
         </ul>
         <Text fontSize="lg" mt={6}>
