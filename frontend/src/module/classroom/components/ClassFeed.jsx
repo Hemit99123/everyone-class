@@ -12,6 +12,7 @@ import { getPost } from '../utils/postOperations'; // Update the path to the cor
 import { useParams } from 'react-router-dom';
 import Post from './Post';
 import NotFound from './NotFound';
+import Loading from './Loading';
 
 const ClassFeed = () => {
   const { id } = useParams();
@@ -46,11 +47,7 @@ const ClassFeed = () => {
   
   if (loading) {
     return (
-      <Container maxW="100%" p={8}>
-        <Center>
-          <Text fontSize='4xl'>Loading...</Text>
-        </Center>
-      </Container>
+      <Loading />
     );
   }
 
