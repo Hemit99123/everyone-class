@@ -71,8 +71,8 @@ export const updateClass = async (documentID, title, instructor, description, ge
 
 export const getClass = async (userSub) => {
   try {
-    const response = await fetch(`${base_url}/get`, {
-      method: 'POST', // Use POST or GET as appropriate
+    const response = await fetch(`${base_url}/get?userSub=${userSub}`, {
+      method: 'GET', // Use POST or GET as appropriate
       headers: {
         'Content-Type': 'application/json', // Set the content type header
       },
