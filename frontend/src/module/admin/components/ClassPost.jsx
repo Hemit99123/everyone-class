@@ -226,7 +226,7 @@ const AdminClassCard = ({ classItem }) => {
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme='blue' onClick={() => {updateClass(classItem._id, title, instructor, description, genre)}} marginRight={2}>
+            <Button colorScheme='blue' onClick={() => {updateClass(classItem._id, title, description, genre)}} marginRight={2}>
               Save changes
             </Button>
             <Button onClick={onCloseUpdateModal}>Cancel</Button>
@@ -260,13 +260,16 @@ const AdminClassCard = ({ classItem }) => {
             </FormControl>
 
             <Button onClick={toggleGithubForm} mt={4}>
-              {githubForm ? 
-                <TriangleUpIcon mr={toggleMarginRight}/>  
-                :  
-                <TriangleDownIcon mr={toggleMarginRight} /> 
-              }
-              Link Github Repo 
+              <Flex alignItems="center">
+                {githubForm ? 
+                  <TriangleUpIcon mr={toggleMarginRight}/>  
+                  :  
+                  <TriangleDownIcon mr={toggleMarginRight} /> 
+                }
+                <span>Link Github Repo</span>
+              </Flex>
             </Button>
+
             {githubForm &&
               <>
                 <FormControl>
@@ -287,13 +290,15 @@ const AdminClassCard = ({ classItem }) => {
                 </Center>
               </>
             }
-            <Button onClick={toggleYoutubeForm} mt={4} ml={3} >
-              {youtubeForm ? 
-                <TriangleUpIcon mr={toggleMarginRight}/>  
-                :  
-                <TriangleDownIcon mr={toggleMarginRight} /> 
-              }
-              Link Youtube
+            <Button onClick={toggleYoutubeForm} mt={4}>
+              <Flex alignItems="center">
+                {youtubeForm ? 
+                  <TriangleUpIcon mr={toggleMarginRight}/>  
+                  :  
+                  <TriangleDownIcon mr={toggleMarginRight} /> 
+                }
+                <span>Link Youtube</span>
+              </Flex>
             </Button>
             {youtubeForm &&
             <>

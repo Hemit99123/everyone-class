@@ -1,4 +1,4 @@
-const base_url = 'http://api.everyonestem.org/post';
+const base_url = 'https://api.everyonestem.org/post';
 
 export const createPost = async (classID, title, message, zoom, realworldApplication, githubURL, githubName, githubLanguage, githubCloneURL, youtubeID) => {
     try {
