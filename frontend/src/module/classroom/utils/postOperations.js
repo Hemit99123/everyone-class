@@ -2,8 +2,8 @@ const base_url = 'https://api.everyonestem.org/post'
 
 export const getPost = async (id) => {
     try {
-      const response = await fetch(`${base_url}/get`, {
-        method: 'POST', // Use POST or GET as appropriate
+      const response = await fetch(`${base_url}/get?classID=${id}`, {
+        method: 'GET', // Use POST or GET as appropriate
         headers: {
           'Content-Type': 'application/json', // Set the content type header
         },

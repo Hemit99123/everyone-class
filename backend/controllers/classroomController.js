@@ -51,7 +51,7 @@ const ClassController = {
   
   getClass: async (req, res) => {
     try {
-      const {userSub} = req.body
+      const {userSub} = req.query
       const allClasses = await Class.find({userSub})
       res.json(allClasses)
     } catch(error) {
