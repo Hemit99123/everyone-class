@@ -93,7 +93,7 @@ export default function Navbar() {
                   </Center>
                   <br />
                   <MenuDivider />
-                  <MenuItem onClick={logout} icon={<FaSignOutAlt />}>
+                  <MenuItem onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
                     Logout 
                   </MenuItem>
                 </MenuList>
