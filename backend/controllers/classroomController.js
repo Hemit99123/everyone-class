@@ -32,12 +32,11 @@ const ClassController = {
     }
   },
   updateClass: async (req,res) => {
-    const {id, title, instructor, description, genre} = req.body
+    const {id, title, description, genre} = req.body
     try {
       const updatedClass = await Class.updateOne({_id: id}, {
         $set : {
           title,
-          instructor, 
           description,
           genre
         }

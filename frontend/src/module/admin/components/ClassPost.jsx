@@ -211,7 +211,7 @@ const AdminClassCard = ({ classItem }) => {
 
             <FormControl mt={4}>
               <FormLabel>Genre</FormLabel>
-              <Select value={genre} onChange={(e) => {setGenre(e.target.value)}}>
+              <Select value={genre} onChange={(e) => { console.log(e.target.value); setGenre(e.target.value) }}>
                 <option value="business">Business</option>
                 <option value="computer">Computer</option>
                 <option value="math">Math</option>
