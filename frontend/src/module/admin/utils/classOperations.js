@@ -76,7 +76,6 @@ export const getClass = async (userSub) => {
       headers: {
         'Content-Type': 'application/json', // Set the content type header
       },
-      body: JSON.stringify({ userSub }),
     });
 
     if (!response.ok) {

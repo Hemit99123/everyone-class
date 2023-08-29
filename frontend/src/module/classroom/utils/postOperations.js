@@ -7,7 +7,6 @@ export const getPost = async (id) => {
         headers: {
           'Content-Type': 'application/json', // Set the content type header
         },
-        body: JSON.stringify({ classID: id }),
       });
   
       const data = await response.json();
