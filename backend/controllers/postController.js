@@ -14,7 +14,7 @@ const postController = {
     getPost: async (req, res) => {
       try {
           const { classID } = req.query;
-          const allPost = await Post.find({ classID: classID })
+          const allPost = await Post.find({ classID })
               .sort({ _id: -1 }); // Sort in descending order of _id (timestamp)
           res.json(allPost);
       } catch (error) {
