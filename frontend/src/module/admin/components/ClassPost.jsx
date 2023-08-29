@@ -34,12 +34,11 @@ import {
   AddIcon, 
   DeleteIcon, 
   EditIcon,
-  TriangleDownIcon, 
-  TriangleUpIcon,
   CopyIcon
 } from '@chakra-ui/icons';
 import { FaSync } from 'react-icons/fa';
 import { useAuth0 } from '@auth0/auth0-react';
+import OpenForm from './OpenForm';
 
 const ClassPost = () => {
   const [classData, setClassData] = useState([]);
@@ -57,12 +56,6 @@ const ClassPost = () => {
 
     fetchData();
   }, []);
-
-
-
-
-
-
 
   return (
     <>
@@ -150,10 +143,6 @@ const AdminClassCard = ({ classItem }) => {
   const toggleYoutubeForm = () => {
     setYoutubeForm(prevState => !prevState)
   }
-
-  const toggleMarginRight = 4
-
-
 
   return (
     <>
@@ -259,16 +248,11 @@ const AdminClassCard = ({ classItem }) => {
               <Textarea ref={realworldRef} />
             </FormControl>
 
-            <Button onClick={toggleGithubForm} mt={4}>
-              <Flex alignItems="center">
-                {githubForm ? 
-                  <TriangleUpIcon mr={toggleMarginRight}/>  
-                  :  
-                  <TriangleDownIcon mr={toggleMarginRight} /> 
-                }
-                <span>Link Github Repo</span>
-              </Flex>
-            </Button>
+            <OpenForm 
+              item='Github'
+              form={githubForm}
+              toggleform={toggleGithubForm}
+            />
 
             {githubForm &&
               <>
@@ -290,16 +274,11 @@ const AdminClassCard = ({ classItem }) => {
                 </Center>
               </>
             }
-            <Button onClick={toggleYoutubeForm} mt={4}>
-              <Flex alignItems="center">
-                {youtubeForm ? 
-                  <TriangleUpIcon mr={toggleMarginRight}/>  
-                  :  
-                  <TriangleDownIcon mr={toggleMarginRight} /> 
-                }
-                <span>Link Youtube</span>
-              </Flex>
-            </Button>
+            <OpenForm 
+            item="Youtube"
+            form={youtubeForm}
+            toggleform={toggleYoutubeForm}
+            />
             {youtubeForm &&
             <>
               <FormControl>
