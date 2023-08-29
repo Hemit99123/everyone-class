@@ -39,11 +39,12 @@ import {
 import { FaSync } from 'react-icons/fa';
 import { useAuth0 } from '@auth0/auth0-react';
 import OpenForm from './OpenForm';
+import Loading from '../../../common/Loading';
 
 const ClassPost = () => {
   const [classData, setClassData] = useState([]);
+  const [loading, setLoading] = useState(true)
   const {user} = useAuth0()
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -51,11 +52,17 @@ const ClassPost = () => {
         setClassData(response);
       } catch (error) {
         console.error(error);
+      } finally {
+        setLoading(false); // Regardless of success or error, set loading to false
       }
     };
 
     fetchData();
   }, []);
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <>
@@ -90,11 +97,10 @@ const AdminClassCard = ({ classItem }) => {
   const [youtubeForm, setYoutubeForm] = useState(false)
   const refs = [titleRef, messageRef, zoomRef, realworldRef, ownerRef, repoRef, youtubeID]
 
-  const fetchGithubData = async (link) => {
+  const fetchGithubData = async () => {
     try {
       const response = await getGithubRepo(ownerRef.current.value, repoRef.current.value);
       setGithubRepo(response)
-      console.log(response)
     } catch (error) {
       console.error(error);
     }

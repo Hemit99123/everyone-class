@@ -12,7 +12,7 @@ import { getPost } from '../utils/postOperations'; // Update the path to the cor
 import { useParams } from 'react-router-dom';
 import Post from './Post';
 import NotFound from './NotFound';
-import Loading from './Loading';
+import Loading from '../../../common/Loading';
 
 const ClassFeed = () => {
   const { id } = useParams();
