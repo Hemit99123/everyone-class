@@ -44,7 +44,7 @@ export const deleteClass = async (documentID) => {
   }
 };
 
-export const updateClass = async (documentID, title, instructor, description, genre) => {
+export const updateClass = async (documentID, title, description, genre) => {
   try {
     const response = await fetch(`${base_url}/update`, {
       method: 'PUT',
@@ -54,7 +54,6 @@ export const updateClass = async (documentID, title, instructor, description, ge
       body: JSON.stringify({
         id: documentID,
         title,
-        instructor,
         description,
         genre,
       }),
