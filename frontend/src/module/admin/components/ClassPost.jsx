@@ -116,31 +116,38 @@ const AdminClassCard = ({ classItem }) => {
     }
   };
 
+
   const createPostOperation = () => {
-    // optional fields
-    const realWorldApplication = realworldRef.current.value.trim()
-    const zoomValue = zoomRef.current.value.trim();
-    const githubURL = githubRepo?.html_url
+    const realWorldApplication = realworldRef?.current?.value?.trim();
+    const zoomValue = zoomRef?.current?.value?.trim();
+    const githubURL = githubRepo?.html_url;
     const githubName = githubRepo?.full_name;
     const githubLanguage = githubRepo?.language;
     const githubCloneURL = githubRepo?.clone_url;
+  
     createPost(
       classItem._id,
-      titleRef.current.value,
-      messageRef.current.value,
+      titleRef.current?.value,
+      messageRef.current?.value,
       zoomValue !== "" ? zoomValue : undefined,
-      realWorldApplication !== "" ? realWorldApplication: undefined,
-      githubURL !== "" ? githubURL: undefined,
-      githubName !== "" ? githubName: undefined,
-      githubLanguage !== "" ? githubLanguage: undefined,
-      githubCloneURL !== "" ? githubCloneURL: undefined, 
-      youtubeID !== "" ? youtubeID: undefined 
+      realWorldApplication !== "" ? realWorldApplication : undefined,
+      githubURL !== "" ? githubURL : undefined,
+      githubName !== "" ? githubName : undefined,
+      githubLanguage !== "" ? githubLanguage : undefined,
+      githubCloneURL !== "" ? githubCloneURL : undefined, 
+      youtubeID !== "" ? youtubeID : undefined 
     );
-
-    resetForm(refs)
-    setGithubRepo()
   
-  }
+    resetForm(refs);
+    setGithubRepo();
+  };
+  
+  
+  
+  
+  
+  
+  
 
   const toggleGithubForm = () => {
     setGithubForm(prevState => !prevState)
