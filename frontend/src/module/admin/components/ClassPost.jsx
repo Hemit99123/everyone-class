@@ -108,7 +108,7 @@ const AdminClassCard = ({ classItem }) => {
           <Button flex='1' variant='ghost' leftIcon={<CopyIcon />} onClick={() => {copyText(classItem._id)}}>
             Copy Link
           </Button>
-          <Button flex='1' variant='ghost' leftIcon={<DeleteIcon />} onClick={() => {deleteClass(classItem._id)}}>
+          <Button flex='1' variant='ghost' leftIcon={<DeleteIcon />} onClick={() => {deleteClass(classItem._id, toast)}}>
             Delete
           </Button>
           <Button flex='1' variant='ghost' leftIcon={<EditIcon />} onClick={onOpenUpdateModal}>

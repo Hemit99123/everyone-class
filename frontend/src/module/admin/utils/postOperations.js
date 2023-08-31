@@ -1,6 +1,7 @@
-const base_url = 'https://api.everyonestem.org/post';
-
+// apiUtils.js
+import { api, message as messageToast } from '../../config';
 export const createPost = async (
+
   classID,
   title,
   message,
@@ -12,11 +13,12 @@ export const createPost = async (
   githubCloneURL,
   youtubeID,
   sketchfabHTML,
-  sketchfabTitle
+  sketchfabTitle,
+  toast  // Pass the toast function as an argument
 ) => {
   try {
     const requestBody = {
-      //required fields
+      // required fields
       classID,
       title,
       message,
@@ -28,12 +30,11 @@ export const createPost = async (
       ...(githubLanguage && { githubLanguage }),
       ...(githubCloneURL && { githubCloneURL }),
       ...(youtubeID && { youtubeID }),
-      ...(sketchfabHTML && {sketchfabHTML}),
-      ...(sketchfabTitle && {sketchfabTitle})
-
+      ...(sketchfabHTML && { sketchfabHTML }),
+      ...(sketchfabTitle && { sketchfabTitle })
     };
 
-    const response = await fetch(`${base_url}/create`, {
+    const response = await fetch(`${api}/post/create`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -42,14 +43,18 @@ export const createPost = async (
     });
 
     if (response.ok) {
-      alert('Post created successfully. Please refresh the page.');
-    } else {
-      alert('Error creating the post.');
+      toast({
+        title: 'Post post created successfully',
+        description: messageToast,
+        status: 'success',
+        duration: 9000,
+        isClosable: true
+      });
     }
 
     return response.json();
   } catch (error) {
-    alert('An error occurred while creating the post.', error);
+    console.error(error);
     throw error;
   }
 };

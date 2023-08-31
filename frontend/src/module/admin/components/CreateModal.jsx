@@ -13,7 +13,8 @@ import {
     Center,
     Textarea,
     Button, 
-    Text
+    Text,
+    useToast
 } from '@chakra-ui/react'
 import OpenForm from './OpenForm';
 import { FaSync } from 'react-icons/fa';
@@ -21,6 +22,8 @@ import {createPost} from '../utils/postOperations'
 import { youtube, getGithubRepo, getSketchfab } from '../utils/addons';
 import resetForm from '../utils/resetForm'
 const CreateModal = ({classID, isOpenCreateModal, onCloseCreateModal}) => {
+
+  const toast = useToast()
 
       // post fields
 
@@ -64,7 +67,8 @@ const CreateModal = ({classID, isOpenCreateModal, onCloseCreateModal}) => {
       githubCloneURL !== "" ? githubCloneURL : undefined, 
       youtubeID !== "" ? youtubeID : undefined,
       sketchFabHTML !== "" ? sketchFabHTML: undefined,
-      sketchFabTitle !== "" ? sketchFabTitle: undefined
+      sketchFabTitle !== "" ? sketchFabTitle: undefined,
+      toast
     );
   
     resetForm(refs);

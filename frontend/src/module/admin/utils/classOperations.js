@@ -1,8 +1,10 @@
-const base_url = 'https:///api.everyonestem.org/class'
+import {api, message} from '../../config'
 
-export const createClass = async (title, genre, instructor, description, userSub) => {
+
+
+export const createClass = async (title, genre, instructor, description, userSub, toast) => {
   try {
-    const response = await fetch(`${base_url}/create`, {
+    const response = await fetch(`${api}/class/create`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -15,7 +17,13 @@ export const createClass = async (title, genre, instructor, description, userSub
         userSub
       }),
     });
-    alert('Created successfully, refresh your page to see the changes');
+    toast({
+      title: 'Created successfully',
+      description: message,
+      status: 'success',
+      duration: 9000,
+      isClosable: true,
+    })
     return response.json();
   } catch (error) {
     console.error('Error creating class:', error);
@@ -23,9 +31,9 @@ export const createClass = async (title, genre, instructor, description, userSub
   }
 };
 
-export const deleteClass = async (documentID) => {
+export const deleteClass = async (documentID, toast) => {
   try {
-    const response = await fetch(`${base_url}/delete`, {
+    const response = await fetch(`${api}/class/delete`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -35,7 +43,13 @@ export const deleteClass = async (documentID) => {
       }),
     });
 
-    alert('Deleted successfully, refresh your page to see the changes');
+    toast({
+      title: 'Deleted successfully',
+      description: message,
+      status: 'success',
+      duration: 9000,
+      isClosable: true,
+    })
     const data = await response.json();
     return data;
   } catch (error) {
@@ -44,9 +58,9 @@ export const deleteClass = async (documentID) => {
   }
 };
 
-export const updateClass = async (documentID, title, description, genre) => {
+export const updateClass = async (documentID, title, description, genre, toast) => {
   try {
-    const response = await fetch(`${base_url}/update`, {
+    const response = await fetch(`${api}/class/update`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -59,7 +73,13 @@ export const updateClass = async (documentID, title, description, genre) => {
       }),
     });
 
-    alert('Updated successfully, refresh your page to see the changes');
+    toast({
+      title: 'Updated successfully',
+      description: message,
+      status: 'success',
+      duration: 9000,
+      isClosable: true,
+    })
     const data = await response.json();
     return data;
   } catch (error) {
@@ -70,7 +90,7 @@ export const updateClass = async (documentID, title, description, genre) => {
 
 export const getClass = async (userSub) => {
   try {
-    const response = await fetch(`${base_url}/get?userSub=${userSub}`, {
+    const response = await fetch(`${api}/class/get?userSub=${userSub}`, {
       method: 'GET', // Use POST or GET as appropriate
       headers: {
         'Content-Type': 'application/json', // Set the content type header

@@ -13,7 +13,8 @@ import {
   ModalBody,
   Select,
   useDisclosure,  
-  Textarea
+  Textarea,
+  useToast
 } from '@chakra-ui/react';
 import {AddIcon} from '@chakra-ui/icons'
 import { createClass } from '../utils/classOperations';
@@ -26,11 +27,12 @@ const CreateClassButton = () => {
   const genreRef = useRef()
   const descriptionRef = useRef()
   const refs = [titleRef, genreRef, descriptionRef]
+  const toast = useToast()
 
   const {user} = useAuth0()
 
   const createClassOperation = () => {
-    createClass(titleRef.current.value, genreRef.current.value, user.name, descriptionRef.current.value, user.sub)
+    createClass(titleRef.current.value, genreRef.current.value, user.name, descriptionRef.current.value, user.sub, toast)
     resetForm(refs)
   }
 

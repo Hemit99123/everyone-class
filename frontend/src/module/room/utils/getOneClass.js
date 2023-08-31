@@ -1,8 +1,8 @@
-const base_url = 'https://api.everyonestem.org/class'
+import {api} from '../../config'
 
 export const getOneClass = async (id) => {
     try {
-      const response = await fetch(`${base_url}/getone`, {
+      const response = await fetch(`${api}/class/getone`, {
         method: 'POST', // Use POST or GET as appropriate
         headers: {
           'Content-Type': 'application/json', // Set the content type header

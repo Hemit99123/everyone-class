@@ -1,8 +1,8 @@
-const base_url = 'https://api.everyonestem.org/post'
+import {api} from '../../config'
 
 export const getPost = async (id) => {
     try {
-      const response = await fetch(`${base_url}/get?classID=${id}`, {
+      const response = await fetch(`${api}/post/get?classID=${id}`, {
         method: 'GET', // Use POST or GET as appropriate
         headers: {
           'Content-Type': 'application/json', // Set the content type header
@@ -20,7 +20,7 @@ export const getPost = async (id) => {
 
   export const deletePost = async (documentID) => {
     try {
-      const response = await fetch(`${base_url}/delete`, {
+      const response = await fetch(`${api}/post/delete`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

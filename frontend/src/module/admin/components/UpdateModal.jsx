@@ -12,7 +12,8 @@ import {
     ModalFooter,
     Select,
     Textarea,
-    Button
+    Button,
+    useToast
 } from '@chakra-ui/react'
 import {updateClass} from '../utils/classOperations'
 
@@ -21,6 +22,7 @@ const UpdateModal = ({id, isOpenUpdateModal, onCloseUpdateModal, initialTitle, i
     const [title, setTitle] = useState(initialTitle)
     const [description, setDescription] = useState(initialDescription)
     const [genre, setGenre] = useState(initialGenre)
+    const toast = useToast()
   return (
     <>
               <Modal isOpen={isOpenUpdateModal} onClose={onCloseUpdateModal}>
@@ -51,7 +53,7 @@ const UpdateModal = ({id, isOpenUpdateModal, onCloseUpdateModal, initialTitle, i
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme='blue' onClick={() => {updateClass(id, title, description, genre)}} marginRight={2}>
+            <Button colorScheme='blue' onClick={() => {updateClass(id, title, description, genre, toast)}} marginRight={2}>
               Save changes
             </Button>
             <Button onClick={onCloseUpdateModal}>Cancel</Button>
