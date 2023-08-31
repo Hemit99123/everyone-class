@@ -27,7 +27,7 @@ const Post = ({id, title, message, zoom, githubName, githubURL, githubCloneURL, 
     const {user} = useAuth0()
     const [showYoutube, setShowYoutube] = useState({});
     const [showGithub, setShowGithub] = useState({});
-    const [showSketchfab, setShowSketchfab] = useState()
+    const [showSketchfab, setShowSketchfab] = useState({})
     const [isSmallerThan500] = useMediaQuery('(max-width: 500px)')
     const toast = useToast()
   return (
@@ -104,7 +104,7 @@ const Post = ({id, title, message, zoom, githubName, githubURL, githubCloneURL, 
                     toast({
                       title: 'Copied clone url',
                       description: "Now, you can use this clone url with Git to clone this repo :)",
-                      status: 'success',
+                      status: 'info',
                       duration: 5500,
                       isClosable: true,
                     })
@@ -163,8 +163,17 @@ const Post = ({id, title, message, zoom, githubName, githubURL, githubCloneURL, 
     )}
 
 {sketchfabTitle && (
-  <Box p={4} my={4}>
-    <Flex alignItems="center" mb={2}>
+  <Box p={2}>
+    <Flex 
+      alignItems="center" 
+      cursor='pointer'
+      onClick={() =>
+        setShowSketchfab((prevState) => ({
+          ...prevState,
+          [id]: !prevState[id],
+        }))
+      }
+    >
       <FaCubes style={{ fontSize: '24px', marginRight: '8px' }} />
       <Text fontSize="lg" fontWeight="semibold">
         3D Model
@@ -172,16 +181,9 @@ const Post = ({id, title, message, zoom, githubName, githubURL, githubCloneURL, 
       <Text ml={2} color="gray.600">
         Powered by Sketchfab
       </Text>
-      <Button
-        ml={4}
-        size="sm"
-        onClick={() => setShowSketchfab(!showSketchfab)}
-      >
-        {showSketchfab ? 'Hide' : 'Show'}
-      </Button>
     </Flex>
 
-    {showSketchfab && (
+    {showSketchfab[id] && (
   <Box mt={2}>
     <Text fontSize="md" fontWeight="semibold" mb={2}>
       {sketchfabTitle}
