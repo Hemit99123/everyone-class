@@ -7,7 +7,8 @@ import {
     Link,
     IconButton,
     Flex,
-    useToast
+    useToast,
+    useMediaQuery
   } from '@chakra-ui/react';
   import {
     FaYoutube,
@@ -15,15 +16,19 @@ import {
     FaCode,
     FaVideo,
     FaExternalLinkAlt,
+    FaCubes
   } from 'react-icons/fa';
 import { useAuth0 } from '@auth0/auth0-react';
 import { DeleteIcon } from '@chakra-ui/icons';
 import { deletePost } from '../utils/postOperations';
+import parse from 'html-react-parser';
 
-const Post = ({id, title, message, zoom, githubName, githubURL, githubCloneURL, githubDescription, githubLanguage, youtubeID, realworldApplication, userSub}) => {
+const Post = ({id, title, message, zoom, githubName, githubURL, githubCloneURL, githubDescription, githubLanguage, youtubeID, sketchfabHTML, sketchfabTitle, realworldApplication, userSub}) => {
     const {user} = useAuth0()
     const [showYoutube, setShowYoutube] = useState({});
     const [showGithub, setShowGithub] = useState({});
+    const [showSketchfab, setShowSketchfab] = useState()
+    const [isSmallerThan500] = useMediaQuery('(max-width: 500px)')
     const toast = useToast()
   return (
     <Box borderRadius="md" boxShadow="md" p={4} mb={4}>
@@ -156,6 +161,57 @@ const Post = ({id, title, message, zoom, githubName, githubURL, githubCloneURL, 
         <Text fontSize="md">{realworldApplication}</Text>
       </Box>
     )}
+
+{sketchfabTitle && (
+  <Box p={4} my={4}>
+    <Flex alignItems="center" mb={2}>
+      <FaCubes style={{ fontSize: '24px', marginRight: '8px' }} />
+      <Text fontSize="lg" fontWeight="semibold">
+        3D Model
+      </Text>
+      <Text ml={2} color="gray.600">
+        Powered by Sketchfab
+      </Text>
+      <Button
+        ml={4}
+        size="sm"
+        onClick={() => setShowSketchfab(!showSketchfab)}
+      >
+        {showSketchfab ? 'Hide' : 'Show'}
+      </Button>
+    </Flex>
+
+    {showSketchfab && (
+  <Box mt={2}>
+    <Text fontSize="md" fontWeight="semibold" mb={2}>
+      {sketchfabTitle}
+    </Text>
+    {isSmallerThan500 ? (
+    <Box
+    position="relative"
+    paddingBottom="56.25%" // 16:9 aspect ratio
+    height="0"
+    background="black" // Set the background color
+  >
+    <iframe
+      srcDoc={sketchfabHTML}
+      title="Sketchfab Model"
+      width="100%"
+      height="100%"
+      style={{ position: "absolute", top: "0", left: "0", border: "none" }}
+    />
+  </Box>
+    ): (
+      <>  
+            {parse(sketchfabHTML)}
+      </>
+    )}
+
+  </Box>
+)}
+  </Box>
+)}
+
     {userSub === user.sub && (
       <Button onClick={() => deletePost(id)}>
         <DeleteIcon />

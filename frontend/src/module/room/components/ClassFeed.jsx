@@ -95,6 +95,8 @@ const ClassFeed = () => {
             githubCloneURL={item.githubCloneURL}
             githubDescription={item.githubDescription}
             githubLanguage={item.githubLanguage}
+            sketchfabHTML={item.sketchfabHTML}
+            sketchfabTitle={item.sketchfabTitle}
             youtubeID={item.youtubeID}
             realworldApplication={item.realworldApplication}
             userSub={classroom?.userSub}

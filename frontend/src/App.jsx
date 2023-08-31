@@ -11,7 +11,7 @@ import Navbar from './common/Navbar';
 import AuthForm from './module/main/components/AuthForm'
 import Main from './module/main/index';
 import Admin from './module/admin/index';
-import Class from './module/classroom/index';
+import Class from './module/room/index';
 
 const App = () => {
   const { isAuthenticated } =
