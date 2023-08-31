@@ -9,7 +9,9 @@ const postSchema = new mongoose.Schema({
   githubName: {type: String, required: false},
   githubLanguage: {type: String, required: false},
   githubCloneURL: {type: String, required: false},
-  youtubeID: {type: String, required: false}
+  youtubeID: {type: String, required: false},
+  sketchfabHTML: {type: String, required: false},
+  sketchfabTitle: {type: String, required: false}
 });
 
 module.exports = mongoose.model('Post', postSchema);

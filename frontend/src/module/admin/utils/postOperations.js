@@ -10,20 +10,27 @@ export const createPost = async (
   githubName,
   githubLanguage,
   githubCloneURL,
-  youtubeID
+  youtubeID,
+  sketchfabHTML,
+  sketchfabTitle
 ) => {
   try {
     const requestBody = {
+      //required fields
       classID,
       title,
       message,
+      // optional fields
       ...(zoom && { zoom }),
       ...(realworldApplication && { realworldApplication }),
       ...(githubURL && { githubURL }),
       ...(githubName && { githubName }),
       ...(githubLanguage && { githubLanguage }),
       ...(githubCloneURL && { githubCloneURL }),
-      ...(youtubeID && { youtubeID })
+      ...(youtubeID && { youtubeID }),
+      ...(sketchfabHTML && {sketchfabHTML}),
+      ...(sketchfabTitle && {sketchfabTitle})
+
     };
 
     const response = await fetch(`${base_url}/create`, {

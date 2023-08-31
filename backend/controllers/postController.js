@@ -3,8 +3,8 @@ const Post = require('../models/post')
 const postController = {
     createPost: async (req,res) => {
         try {
-            const {classID, title, message, zoom, realworldApplication, githubURL, githubName, githubLanguage, githubCloneURL, youtubeID} = req.body
-            const newPost = new Post({classID, title, message, zoom, realworldApplication, githubURL, githubName, githubLanguage, githubCloneURL, youtubeID})
+            const {classID, title, message, zoom, realworldApplication, githubURL, githubName, githubLanguage, githubCloneURL, youtubeID, sketchfabHTML, sketchfabTitle} = req.body
+            const newPost = new Post({classID, title, message, zoom, realworldApplication, githubURL, githubName, githubLanguage, githubCloneURL, youtubeID, sketchfabHTML, sketchfabTitle})
             await newPost.save()
             res.status(201).json({message: "Created post sucessfully"})
         } catch(error) {
