@@ -14,6 +14,7 @@ export const createPost = async (
   youtubeID,
   sketchfabHTML,
   sketchfabTitle,
+  userSub,
   toast  // Pass the toast function as an argument
 ) => {
   try {
@@ -31,7 +32,8 @@ export const createPost = async (
       ...(githubCloneURL && { githubCloneURL }),
       ...(youtubeID && { youtubeID }),
       ...(sketchfabHTML && { sketchfabHTML }),
-      ...(sketchfabTitle && { sketchfabTitle })
+      ...(sketchfabTitle && { sketchfabTitle }),
+      userSub
     };
 
     const response = await fetch(`${api}/post/create`, {
@@ -44,7 +46,7 @@ export const createPost = async (
 
     if (response.ok) {
       toast({
-        title: 'Post post created successfully',
+        title: 'Post was created successfully',
         description: messageToast,
         status: 'success',
         duration: 9000,

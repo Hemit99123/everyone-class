@@ -53,17 +53,17 @@ const CreateClassButton = () => {
           <ModalHeader>Create a new classroom</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
-            <FormControl>
+            <FormControl isRequired>
               <FormLabel>Title</FormLabel>
               <Input placeholder='Title' ref={titleRef}/>
             </FormControl>
 
-            <FormControl mt={4}>
+            <FormControl mt={4} isRequired>
               <FormLabel>Description</FormLabel>
               <Textarea placeholder='Description' ref={descriptionRef}/>
             </FormControl>
 
-            <FormControl mt={4}>
+            <FormControl mt={4} isRequired>
               <FormLabel>Genre</FormLabel>
               <Select placeholder="Select genre" ref={genreRef}>
                 <option value="business">Business</option>

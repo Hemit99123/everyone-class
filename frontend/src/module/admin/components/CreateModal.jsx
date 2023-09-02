@@ -16,6 +16,7 @@ import {
     Text,
     useToast
 } from '@chakra-ui/react'
+import {useAuth0} from '@auth0/auth0-react'
 import OpenForm from './OpenForm';
 import { FaSync } from 'react-icons/fa';
 import {createPost} from '../utils/postOperations'
@@ -24,6 +25,8 @@ import resetForm from '../utils/resetForm'
 const CreateModal = ({classID, isOpenCreateModal, onCloseCreateModal}) => {
 
   const toast = useToast()
+
+  const {user} = useAuth0()
 
       // post fields
 
@@ -68,6 +71,7 @@ const CreateModal = ({classID, isOpenCreateModal, onCloseCreateModal}) => {
       youtubeID !== "" ? youtubeID : undefined,
       sketchFabHTML !== "" ? sketchFabHTML: undefined,
       sketchFabTitle !== "" ? sketchFabTitle: undefined,
+      user.sub,
       toast
     );
   
@@ -124,12 +128,12 @@ const CreateModal = ({classID, isOpenCreateModal, onCloseCreateModal}) => {
           <ModalHeader>Create a post</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
-            <FormControl>
+            <FormControl isRequired>
               <FormLabel>Post title</FormLabel>
               <Input ref={titleRef}  />
             </FormControl>
 
-            <FormControl mt={4}>
+            <FormControl mt={4} isRequired>
               <FormLabel>Message</FormLabel>
               <Textarea ref={messageRef} />
             </FormControl>
@@ -192,7 +196,7 @@ const CreateModal = ({classID, isOpenCreateModal, onCloseCreateModal}) => {
             </>
             }
             <OpenForm 
-              item="SketchFab"
+              item="SketchFab (3D Model)"
               form={sketchfabForm}
               toggleform={toggleSketchFabForm}
             />
