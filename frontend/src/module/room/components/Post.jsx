@@ -99,7 +99,7 @@ const Post = ({id, title, message, zoom, githubName, githubURL, githubCloneURL, 
               leftIcon={<FaCode />}
               onClick={() => {
                 navigator.clipboard
-                  .writeText(githubCloneURL)
+                  .writeText(`git clone ${githubCloneURL}`)
                   .then(() => {
                     toast({
                       title: 'Copied clone url',

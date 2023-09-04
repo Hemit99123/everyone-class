@@ -2,12 +2,11 @@ import {api} from '../../config'
 
 export const getOneClass = async (id) => {
     try {
-      const response = await fetch(`${api}/class/getone`, {
-        method: 'POST', // Use POST or GET as appropriate
+      const response = await fetch(`${api}/class/getone?id=${id}`, {
+        method: 'GET', // Use POST or GET as appropriate
         headers: {
           'Content-Type': 'application/json', // Set the content type header
-        },
-        body: JSON.stringify({ id }),
+        }
       });
   
       if (!response.ok) {
