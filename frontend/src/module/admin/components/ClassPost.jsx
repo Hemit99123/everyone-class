@@ -29,7 +29,6 @@ const ClassPost = () => {
   const [classData, setClassData] = useState([]);
   const [loading, setLoading] = useState(true)
   const {user} = useAuth0()
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -59,8 +58,6 @@ const ClassPost = () => {
 };
 
 const AdminClassCard = ({ classItem }) => {
-  const {user} = useAuth0()
-  const sub = user.sub
   const {isOpen: isOpenUpdateModal, onOpen: onOpenUpdateModal, onClose: onCloseUpdateModal} = useDisclosure()
   const {isOpen: isOpenCreateModal, onOpen: onOpenCreateModal, onClose: onCloseCreateModal} = useDisclosure()
   const toast = useToast()
@@ -111,7 +108,7 @@ const AdminClassCard = ({ classItem }) => {
           <Button flex='1' variant='ghost' leftIcon={<CopyIcon />} onClick={() => {copyText(classItem._id)}}>
             Copy Link
           </Button>
-          <Button flex='1' variant='ghost' leftIcon={<DeleteIcon />} onClick={() => {deleteClass(classItem._id, sub, toast)}}>
+          <Button flex='1' variant='ghost' leftIcon={<DeleteIcon />} onClick={() => {deleteClass(classItem._id, toast)}}>
             Delete
           </Button>
           <Button flex='1' variant='ghost' leftIcon={<EditIcon />} onClick={onOpenUpdateModal}>

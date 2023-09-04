@@ -16,10 +16,8 @@ import {
     useToast
 } from '@chakra-ui/react'
 import {updateClass} from '../utils/classOperations'
-import { useAuth0 } from '@auth0/auth0-react'
-const UpdateModal = ({id, isOpenUpdateModal, onCloseUpdateModal, initialTitle, initialDescription, initialGenre }) => {
 
-  const {user} = useAuth0()
+const UpdateModal = ({id, isOpenUpdateModal, onCloseUpdateModal, initialTitle, initialDescription, initialGenre }) => {
 
     const [title, setTitle] = useState(initialTitle)
     const [description, setDescription] = useState(initialDescription)
@@ -55,7 +53,7 @@ const UpdateModal = ({id, isOpenUpdateModal, onCloseUpdateModal, initialTitle, i
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme='blue' onClick={() => {updateClass(id, title, description, genre, user.sub, toast)}} marginRight={2}>
+            <Button colorScheme='blue' onClick={() => {updateClass(id, title, description, genre, toast)}} marginRight={2}>
               Save changes
             </Button>
             <Button onClick={onCloseUpdateModal}>Cancel</Button>

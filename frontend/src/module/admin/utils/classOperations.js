@@ -1,5 +1,7 @@
 import {api, message} from '../../config'
 
+
+
 export const createClass = async (title, genre, instructor, description, userSub, toast) => {
   try {
     const response = await fetch(`${api}/class/create`, {
@@ -29,7 +31,7 @@ export const createClass = async (title, genre, instructor, description, userSub
   }
 };
 
-export const deleteClass = async (documentID, sub, toast) => {
+export const deleteClass = async (documentID, toast) => {
   try {
     const response = await fetch(`${api}/class/delete`, {
       method: 'DELETE',
@@ -38,7 +40,6 @@ export const deleteClass = async (documentID, sub, toast) => {
       },
       body: JSON.stringify({
         id: documentID,
-        userSub: sub 
       }),
     });
 
@@ -57,7 +58,7 @@ export const deleteClass = async (documentID, sub, toast) => {
   }
 };
 
-export const updateClass = async (documentID, title, description, genre, userSub, toast) => {
+export const updateClass = async (documentID, title, description, genre, toast) => {
   try {
     const response = await fetch(`${api}/class/update`, {
       method: 'PUT',
@@ -69,7 +70,6 @@ export const updateClass = async (documentID, title, description, genre, userSub
         title,
         description,
         genre,
-        userSub
       }),
     });
 
