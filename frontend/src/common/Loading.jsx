@@ -9,7 +9,7 @@ const Loading = () => {
         Loading...
       </Text>
       <Text mt={2}>
-        If it is taking a while, please be patient, as this might happen when our server has been inactive for some time
+        If it is taking a while, please be patient, as this might happen when our server has been inactive for some time due to our current plan.
       </Text>
       <Text mt={2} fontStyle="italic">
         We appreciate your patience at Everyone STEM :)
