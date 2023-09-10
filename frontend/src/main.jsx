@@ -33,8 +33,8 @@ function Auth0Wrapper() {
 
 root.render(
   <Auth0Provider
-    domain="dev-kpnci3ue6fweb61n.us.auth0.com"
-    clientId="83Xw8IxkjSvECpBGgp7ib0EWTTfs1zRM"
+    domain="everyonestem.us.auth0.com"
+    clientId="iTBp10mQvziQhfGxOb1rZ8MAzqhQX67r"
     authorizationParams={{
       redirect_uri: window.location.origin,
     }}

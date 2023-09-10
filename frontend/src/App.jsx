@@ -8,10 +8,10 @@ import {
 } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import Navbar from './common/Navbar';
-import AuthForm from './module/main/components/AuthForm'
-import Main from './module/main/index';
-import Admin from './module/admin/index';
-import Class from './module/room/index';
+import AuthForm from './pages/main/components/AuthForm'
+import Main from './pages/main/index';
+import Admin from './pages/admin/index';
+import Class from './pages/room/index';
 
 const App = () => {
   const { isAuthenticated } =
