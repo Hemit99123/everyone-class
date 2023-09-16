@@ -7,7 +7,7 @@ const Admin = () => {
   return (
     <Box padding={5}>
       <Text fontSize="4xl" fontWeight="bold" mb="0.3rem" marginRight={5}>
-        Admin Portal
+        Teacher Admin Portal:
       </Text>
       <CreateClassButton />
       <ClassPost />

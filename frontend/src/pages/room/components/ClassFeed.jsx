@@ -73,6 +73,9 @@ const ClassFeed = () => {
             <Text fontSize="lg" fontWeight="medium" mb={2}>
               Instructor: {classroom?.instructor}
             </Text>
+            <Text fontSize="md" mb={2}>
+              Class ID: <b>{classroom?._id}</b> (use this if you wish to save this class!)
+            </Text> 
             <Text fontSize="md" mb={4}>
               {classroom?.description}
             </Text>

@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import Navbar from './common/Navbar';
-import AuthForm from './pages/main/components/AuthForm'
+import AuthForm from './common/AuthForm'
 import Main from './pages/main/index';
 import Admin from './pages/admin/index';
 import Class from './pages/room/index';

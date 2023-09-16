@@ -1,79 +1,117 @@
-import React from 'react';
-import { Text, Heading, Box, Button, Link } from '@chakra-ui/react';
-import UserInfoComponent from './components/UserInfo';
+import React, { useState, useEffect } from 'react';
+import { Text, Input, Button, Box, Grid, GridItem, Badge, Stack } from '@chakra-ui/react'; 
+import { DeleteIcon, ExternalLinkIcon, AddIcon } from '@chakra-ui/icons';
+import Info from './components/Info';
+import { getClass } from './utils/getClass';
 
 const Main = () => {
+  const [id, setID] = useState('');
+  const [savedClasses, setSavedClasses] = useState([]);
+  const [showForm, setShowForm] = useState(false)
+
+  useEffect(() => {
+    const savedClassesFromLocalStorage = JSON.parse(localStorage.getItem('savedClasses')) || [];
+    setSavedClasses(savedClassesFromLocalStorage);
+  }, []);
+
+  const saveClassroom = async () => {
+    try {
+      const response = await getClass(id);
+
+      if (response && response._id && response.title) {
+        const newClass = {
+          title: response.title,
+          genre: response.genre,
+          link: `https://classroom.everyonestem.org/room/${response._id}`
+        };
+
+        const updatedClasses = [...savedClasses, newClass];
+        setSavedClasses(updatedClasses);
+
+        localStorage.setItem('savedClasses', JSON.stringify(updatedClasses));
+        console.log('Classroom saved successfully.');
+      } else {
+        console.error('Failed to save classroom. Response data is incomplete.');
+      }
+    } catch (error) {
+      console.error('Error saving classroom:', error);
+    }
+  };
+
+  const removeClass = (index) => {
+    const updatedClasses = [...savedClasses];
+    updatedClasses.splice(index, 1);
+    setSavedClasses(updatedClasses);
+    localStorage.setItem('savedClasses', JSON.stringify(updatedClasses));
+  }
+
+  const toggleForm = () => {
+    setShowForm(prevState => !prevState)
+  }
+
   return (
     <>
-      <UserInfoComponent />
-      <Box p={10}  minHeight="60vh" display="flex" alignItems="center" justifyContent="center">
-        <Box maxWidth="600px" p={8} borderRadius="lg" boxShadow="lg">
-          <Heading as="h1" size="xl" mb={4}>
-            This is Everyone Class...
-          </Heading>
-          <Text fontSize="lg">
-            Our tool empowers instructors to easily create and manage STEM (Science, Technology,
-            Engineering, and Mathematics) classrooms, providing an interactive and engaging learning
-            environment for students.
-          </Text>
-          <Text fontSize="lg" mt={6}>
-            With the STEM Classroom Creator, you can:
-          </Text>
-          <ul style={{ paddingLeft: '20px', marginTop: '8px' }}>
-            <li>
-              <Text fontSize="lg">Create your very own classroom</Text>
-            </li>
-            <li>
-              <Text fontSize="lg">Share it with students!</Text>
-            </li>
-            <li>
-              <Text fontSize="lg">Post on the feed to share things with your students</Text>
-            </li>
-          </ul>
-          <Text fontSize="lg" mt={6}>
-            Whether you're an educator in a traditional classroom or a remote learning environment,
-            our tool makes it simple to create an engaging STEM experience for your students.
-          </Text>
-          <Text fontSize="lg" mt={6}>
-            To get started, create a classroom by visiting the{' '}
-            <Link href="/admin" color="blue.500">
-              admin page
-            </Link>
-            .
-          </Text>
-          <Text fontSize="lg" mt={6}>
-            We also offer seamless integration with popular platforms:
-          </Text>
-          <ul style={{ paddingLeft: '20px', marginTop: '8px' }}>
-            <li>
-              <Text fontSize="lg">
-                Integrate your repos from your GitHub repositories to provide coding examples and
-                exercises.
-              </Text>
-            </li>
-            <li>
-              <Text fontSize="lg">
-                Embed educational videos from YouTube to enrich your lessons.
-              </Text>
-            </li>
-            <li>
-              <Text fontSize="lg">
-                Conduct live virtual classes using Zoom for real-time interactions.
-              </Text>
-            </li>
-          </ul>
-          <Button
-            as="a"
-            href="/admin"
-            colorScheme="blue"
-            size="lg"
-            mt={8}
-            _hover={{ textDecoration: 'none' }}
-            width="100%"
-          >
-            Create Your STEM Classroom
+      <Info />
+      <Box p={4}>
+        
+        <Stack
+          spacing={2}
+          direction={['column', 'column', 'row']}
+          justifyContent={['flex-start', 'flex-start', 'flex-end']}
+          mb={3}
+        >
+          <Button onClick={toggleForm} size='lg'>
+            <AddIcon />
           </Button>
-        </Box>
+        </Stack>
+
+        {showForm && 
+        <>
+          <Input onChange={(e) => {setID(e.target.value)}} placeholder='Enter Class ID' mb={4} mt={2}/>
+          <Button onClick={saveClassroom} colorScheme="teal" mb={4} display={['block', 'block']}>
+            Save
+          </Button>
+        </>
+        }
+
+        <Text fontSize='3xl' fontWeight='bold' mb={4}>Saved Classes</Text>
+
+        {savedClasses.length > 0 && (
+          <Grid
+            templateColumns={['1fr', '1fr', 'repeat(3, 1fr)']}
+            gap={4}
+          >
+            {savedClasses.map((classObj, index) => (
+              <GridItem key={index}>
+                <Box borderWidth={1} borderRadius="md" p={4}>
+                  <Text fontSize="lg">
+                    {classObj.title}
+                  </Text>
+                  <Text >
+                    Genre: <Badge backgroundColor='cadetblue' color='white'>{classObj.genre}</Badge>
+                  </Text>
+                  <br />
+                  <Stack
+                    spacing={2}
+                    direction={['column', 'column', 'row']}
+                    justifyContent={['flex-start', 'flex-start', 'flex-end']}
+                  >
+                    <Button onClick={() => {window.location.href = classObj.link}} size="sm">
+                      <ExternalLinkIcon />
+                    </Button>
+                    <Button onClick={() => removeClass(index)} size="sm" ml={1}>
+                      <DeleteIcon />
+                    </Button>
+                  </Stack>
+                </Box>
+              </GridItem>
+            ))}
+          </Grid>
+        )}
+
+        {savedClasses.length === 0 && (
+          <Text>No saved classes yet.</Text>
+        )}
       </Box>
     </>
   );

@@ -67,9 +67,11 @@ const CreateClassButton = () => {
               <FormLabel>Genre</FormLabel>
               <Select placeholder="Select genre" ref={genreRef}>
                 <option value="business">Business</option>
-                <option value="computer">Computer</option>
+                <option value="computer">Computer Science</option>
                 <option value="math">Math</option>
                 <option value="science">Science</option>
+                <option value="engineering">Engineering</option>
+                <option value="psychology">Psychology</option>
               </Select>
             </FormControl>
           </ModalBody>
