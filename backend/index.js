@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const classRoute = require('./routes/classRoute');
 const postRoute = require('./routes/postRoute')
+const quizRoute = require('./routes/quizRoute')
 const indexRoute = require('./routes/indexRoute')
 const cors = require('cors')
 const app = express();
@@ -22,6 +23,7 @@ app.use(cors())
 app.use('/', indexRoute)
 app.use('/class', classRoute);
 app.use('/post', postRoute)
+app.use('/quiz', quizRoute)
 
 // Start server
 app.listen(PORT);

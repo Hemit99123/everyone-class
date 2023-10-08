@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { getClass, deleteClass } from '../utils/classOperations';
 import {
   Box,
   Button,
@@ -18,12 +17,15 @@ import {
   AddIcon, 
   DeleteIcon, 
   EditIcon,
-  CopyIcon
+  CopyIcon,
+  QuestionIcon
 } from '@chakra-ui/icons';
 import { useAuth0 } from '@auth0/auth0-react';
 import Loading from '../../../common/Loading';
 import UpdateModal from './UpdateModal';
 import CreateModal from './CreateModal';
+import QuizModal from './CreateQuizModal';
+import { getClass, deleteClass } from '../utils/classOperations';
 
 const ClassPost = () => {
   const [classData, setClassData] = useState([]);
@@ -32,8 +34,9 @@ const ClassPost = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await getClass(user.sub);
-        setClassData(response);
+        const class_response = await getClass(user.sub);
+        setClassData(class_response);
+        console.log(class_response)
       } catch (error) {
         console.error(error);
       } finally {
@@ -60,6 +63,7 @@ const ClassPost = () => {
 const AdminClassCard = ({ classItem }) => {
   const {isOpen: isOpenUpdateModal, onOpen: onOpenUpdateModal, onClose: onCloseUpdateModal} = useDisclosure()
   const {isOpen: isOpenCreateModal, onOpen: onOpenCreateModal, onClose: onCloseCreateModal} = useDisclosure()
+  const {isOpen: isOpenQuizModal, onOpen: onOpenQuizModal, onClose: onCloseQuizModal} = useDisclosure()
   const toast = useToast()
 
   const copyText = (id) => {
@@ -72,6 +76,7 @@ const AdminClassCard = ({ classItem }) => {
       isClosable: true,
     })
   }
+  
 
   return (
     <>
@@ -105,8 +110,11 @@ const AdminClassCard = ({ classItem }) => {
           <Button flex='1' variant='ghost' leftIcon={<AddIcon />} onClick={onOpenCreateModal}>
             Create
           </Button>
+          <Button flex='1' variant='ghost' leftIcon={<QuestionIcon />} onClick={onOpenQuizModal}>
+            Quiz
+          </Button>          
           <Button flex='1' variant='ghost' leftIcon={<CopyIcon />} onClick={() => {copyText(classItem._id)}}>
-            Copy Link
+            Link
           </Button>
           <Button flex='1' variant='ghost' leftIcon={<DeleteIcon />} onClick={() => {deleteClass(classItem._id, toast)}}>
             Delete
@@ -128,6 +136,11 @@ const AdminClassCard = ({ classItem }) => {
         initialTitle={classItem.title} 
         initialDescription={classItem.description} 
         initialGenre={classItem.genre}
+      />
+      <QuizModal 
+      id={classItem._id}
+      isOpenQuizModal={isOpenQuizModal}
+      onCloseQuizModal={onCloseQuizModal}
       />
     </>
   );
