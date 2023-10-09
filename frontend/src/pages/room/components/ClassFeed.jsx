@@ -280,8 +280,8 @@ const ClassFeed = () => {
           <ModalContent>
             <ModalCloseButton onClick={() => {setIsResultOpen(false)}}/>
             <ModalHeader fontSize={"1.3rem"}>Your result:</ModalHeader>
-            <ModalBody minHeight={'50px'} fontSize={"2rem"}>
-              Result: {mark}%
+            <ModalBody minHeight={'50px'} fontSize={"1.5rem"}>
+              {mark}%
               <Spacer />
               {mark >= 50 ? (
                 <>
