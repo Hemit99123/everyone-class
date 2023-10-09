@@ -22,7 +22,8 @@ import {
   Radio,
   RadioGroup,
   Spacer,
-  ModalCloseButton
+  ModalCloseButton,
+  useMediaQuery
 } from '@chakra-ui/react';
 import { getOneClass } from '../utils/getOneClass';
 import { getPost } from '../utils/postOperations';
@@ -45,7 +46,8 @@ const ClassFeed = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
   const [mark, setMark] = useState(0)
-  const [quizSize, setSize] = React.useState('xl')
+  const [isSmallerThan500] = useMediaQuery('(max-width: 500px)')
+
   const handleNextQuestion = () => {
     setSelectedOptions((prevSelectedOptions) => {
       const updatedSelectedOptions = { ...prevSelectedOptions };
@@ -63,7 +65,9 @@ const ClassFeed = () => {
           updatedSelectedOptions[nextQuestion.questionId] = null;
         });
       }
-  
+      
+      //console.log("Length of selected options: ") will uncomment later
+      //console.log(updatedSelectedOptions.length) will uncomment later
       return updatedSelectedOptions;
     });
   
@@ -72,6 +76,7 @@ const ClassFeed = () => {
 
   const isLastQuestion = currentQuestionIndex === selectedQuiz?.questions.length - 1;
   const totalQuestions = selectedQuiz?.questions.length;
+  //const isOptionSelected = selectedOptions.length === 0 will uncomment later
 
   const handleOptionChange = (questionId, option, correctAnswer) => {
     // Disable other options for the current question once an option is selected
@@ -179,140 +184,143 @@ const ClassFeed = () => {
           </Box>
         </VStack>
       </Container>
-      <Text ml={9} fontSize="4xl" fontWeight="bold" mb={4}>
-        Quizzes
-      </Text>
-      <Box ml={9} display="flex" flexWrap="wrap">
-        {quiz.map((item) => (
-          <Box key={item._id} mb="4" mr="4" flexBasis="300px">
-            <Card maxW="sm" minHeight="150px">
-              <CardBody>
-                <Stack mt="0.5" spacing="3">
-                  <Heading size="md">{item.quiz_title}</Heading>
-                  <Text
-                    maxW="100%"
-                    overflow="hidden"
-                    textOverflow="ellipsis"
-                    whiteSpace="nowrap"
-                  >
-                    {item.description}
-                  </Text>
-                </Stack>
-              </CardBody>
-              <Divider />
-              <CardFooter>
-                <Button
-                  variant="solid"
-                  colorScheme="blue"
-                  onClick={() => handleAttemptClick(item)}
-                >
-                  Attempt
-                </Button>
-              </CardFooter>
-            </Card>
-          </Box>
-        ))}
-      </Box>
 
-      {/* Modal for attempting a quiz */}
-           <Modal isOpen={isModalOpen} isCentered>
-        <ModalOverlay/>
-        <ModalContent pt={'10px'} minh='fit-content' minw='fit-content'>
-          <ModalHeader>Attempt Quiz</ModalHeader>
-          <ModalBody>
-            {selectedQuiz &&
-              selectedQuiz.questions.map((question, index) => (
-                <Box
-                  key={question.questionId}
-                  display={index === currentQuestionIndex ? 'block' : 'none'}
-                >
-                  <Text>{question.question}</Text>
-                  <RadioGroup
-                    value={selectedOptions[question.questionId]}
-                    pb={'50px'} 
-                    onChange={(value) =>
-                      handleOptionChange(
-                        question.questionId,
-                        value,
-                        question.correctAnswer
-                      )
-                    }
-                  >
-                    <Stack direction="column">
-                      {question.options.map((option) => (
-                        <Radio
-                          key={option}
-                          value={option}
-                          isChecked={selectedOptions[question.questionId] === option}
-                          isDisabled={!!selectedOptions[question.questionId] && selectedOptions[question.questionId] !== option}
-                        >
-                          {option}
-                        </Radio>
-                      ))}
-                    </Stack>
-                  </RadioGroup>
-                  {!isLastQuestion && (
-                    <Button onClick={() => handleNextQuestion(question.correctAnswer)} 
-                    mt="auto">
-                      Next
-                    </Button>
-                  )}
-                </Box>
-              ))}
-          </ModalBody>
-          <ModalFooter>
-            {isLastQuestion && (
-              <Button onClick={() => viewResult(handleCloseModal)}>View Results</Button>
-            )}
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-      {/* Modal for results */}
-      <Modal isOpen={isResultOpen} onClose={!isResultOpen} isCentered size={'xl'}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalCloseButton onClick={() => {setIsResultOpen(false)}}/>
-          <ModalHeader>Your result:</ModalHeader>
-          <ModalBody minHeight={'50px'}>
-            Result: {mark}%
-            <Spacer />
-            {mark >= 50 ? (
-              <>
-                You passed!
-              </>
-            ) : (
-              <>
-                You failed
-              </>
-            )}
-          </ModalBody>
-          <ModalFooter />
-        </ModalContent>
-      </Modal>
-
-      <Box ml={9}>
+      <Box ml={isSmallerThan500 ? 3:9}>
         <Text fontSize="4xl" fontWeight="bold" mb={4}>
-          Feed
+          Quizzes
         </Text>
-        {post.map((item) => (
-          <Post
-            key={item._id}
-            id={item._id}
-            title={item.title}
-            message={item.message}
-            zoom={item.zoom}
-            githubName={item.githubName}
-            githubURL={item.githubURL}
-            githubCloneURL={item.githubCloneURL}
-            githubDescription={item.githubDescription}
-            githubLanguage={item.githubLanguage}
-            sketchfabHTML={item.sketchfabHTML}
-            sketchfabTitle={item.sketchfabTitle}
-            youtubeID={item.youtubeID}
-            realworldApplication={item.realworldApplication}
-            userSub={classroom?.userSub}
-          />
-        ))}
+        <Box display="flex" flexWrap="wrap">
+          {quiz.map((item) => (
+            <Box key={item._id} mb="4" mr="4" /*flexBasis="200px"*/ minWidth={"250px"} w={"30vw"} flexGrow={"1"}>
+              <Card minHeight="150px">
+                <CardBody>
+                  <Stack mt="0.5" spacing="3">
+                    <Heading size="md" overflow="hidden" textOverflow="ellipsis" whiteSpace="nowrap">{item.quiz_title}</Heading>
+                    <Text
+                      maxW="100%"
+                      overflow="hidden"
+                      textOverflow="ellipsis"
+                      whiteSpace="nowrap"
+                    >
+                      {item.description}
+                    </Text>
+                  </Stack>
+                </CardBody>
+                <Divider />
+                <CardFooter>
+                  <Button
+                    variant="solid"
+                    colorScheme="blue"
+                    onClick={() => handleAttemptClick(item)}
+                  >
+                    Attempt
+                  </Button>
+                </CardFooter>
+              </Card>
+            </Box>
+          ))}
+        </Box>
+
+        {/* Modal for attempting a quiz */}
+            <Modal isOpen={isModalOpen} isCentered>
+          <ModalOverlay/>
+          <ModalContent minh='fit-content' minw='fit-content'>
+            <ModalHeader fontSize={'1.8rem'} marginBottom={"10px"}  borderBottom={"1px"}>Attempt Quiz</ModalHeader>
+            <ModalBody>
+              {selectedQuiz &&
+                selectedQuiz.questions.map((question, index) => (
+                  <Box
+                    key={question.questionId}
+                    display={index === currentQuestionIndex ? 'block' : 'none'}
+                  >
+                    <Text marginBottom={"10px"} fontSize={'1.1rem'}>{question.question}</Text>
+                    <RadioGroup
+                      value={selectedOptions[question.questionId]}
+                      pb={'50px'} 
+                      onChange={(value) =>
+                        handleOptionChange(
+                          question.questionId,
+                          value,
+                          question.correctAnswer
+                        )
+                      }
+                    >
+                      <Stack direction="column">
+                        {question.options.map((option) => (
+                          <Radio
+                            key={option}
+                            value={option}
+                            isChecked={selectedOptions[question.questionId] === option}
+                            isDisabled={!!selectedOptions[question.questionId] && selectedOptions[question.questionId] !== option}
+                          >
+                            {option}
+                          </Radio>
+                        ))}
+                      </Stack>
+                    </RadioGroup>
+                    {!isLastQuestion && /*isOptionSelected &&*/ (
+                      <Button onClick={() => handleNextQuestion(question.correctAnswer)} 
+                      mt="auto">
+                        Next
+                      </Button>
+                    )}
+                  </Box>
+                ))}
+            </ModalBody>
+            <ModalFooter>
+              {isLastQuestion && (
+                <Button onClick={() => viewResult(handleCloseModal)}>View Results</Button>
+              )}
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+        {/* Modal for results */}
+        <Modal isOpen={isResultOpen} onClose={!isResultOpen} isCentered size={'xl'}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalCloseButton onClick={() => {setIsResultOpen(false)}}/>
+            <ModalHeader fontSize={"1.3rem"}>Your result:</ModalHeader>
+            <ModalBody minHeight={'50px'} fontSize={"1.5rem"}>
+              {mark}%
+              <Spacer />
+              {mark >= 50 ? (
+                <>
+                  You passed!
+                </>
+              ) : (
+                <>
+                  You failed
+                </>
+              )}
+            </ModalBody>
+            <ModalFooter />
+          </ModalContent>
+        </Modal>
+
+        <Box>
+          <Text fontSize="4xl" fontWeight="bold" mb={4}>
+            Feed
+          </Text>
+          {post.map((item) => (
+            <Post
+              key={item._id}
+              id={item._id}
+              title={item.title}
+              message={item.message}
+              zoom={item.zoom}
+              githubName={item.githubName}
+              githubURL={item.githubURL}
+              githubCloneURL={item.githubCloneURL}
+              githubDescription={item.githubDescription}
+              githubLanguage={item.githubLanguage}
+              sketchfabHTML={item.sketchfabHTML}
+              sketchfabTitle={item.sketchfabTitle}
+              youtubeID={item.youtubeID}
+              realworldApplication={item.realworldApplication}
+              userSub={classroom?.userSub}
+            />
+          ))}
+        </Box>
       </Box>
     </div>
   );
