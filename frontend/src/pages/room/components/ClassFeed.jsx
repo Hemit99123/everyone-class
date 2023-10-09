@@ -45,6 +45,7 @@ const ClassFeed = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
   const [mark, setMark] = useState(0)
+  const [quizSize, setSize] = React.useState('xl')
   const handleNextQuestion = () => {
     setSelectedOptions((prevSelectedOptions) => {
       const updatedSelectedOptions = { ...prevSelectedOptions };
@@ -214,21 +215,21 @@ const ClassFeed = () => {
       </Box>
 
       {/* Modal for attempting a quiz */}
-           <Modal isOpen={isModalOpen} >
-        <ModalOverlay />
-        <ModalContent>
+           <Modal isOpen={isModalOpen} isCentered>
+        <ModalOverlay/>
+        <ModalContent pt={'10px'} minh='fit-content' minw='fit-content'>
           <ModalHeader>Attempt Quiz</ModalHeader>
           <ModalBody>
             {selectedQuiz &&
               selectedQuiz.questions.map((question, index) => (
                 <Box
                   key={question.questionId}
-                  mb="4"
                   display={index === currentQuestionIndex ? 'block' : 'none'}
                 >
                   <Text>{question.question}</Text>
                   <RadioGroup
                     value={selectedOptions[question.questionId]}
+                    pb={'50px'} 
                     onChange={(value) =>
                       handleOptionChange(
                         question.questionId,
@@ -251,7 +252,8 @@ const ClassFeed = () => {
                     </Stack>
                   </RadioGroup>
                   {!isLastQuestion && (
-                    <Button onClick={() => handleNextQuestion(question.correctAnswer)}>
+                    <Button onClick={() => handleNextQuestion(question.correctAnswer)} 
+                    mt="auto">
                       Next
                     </Button>
                   )}
@@ -266,12 +268,12 @@ const ClassFeed = () => {
         </ModalContent>
       </Modal>
       {/* Modal for results */}
-      <Modal isOpen={isResultOpen} onClose={!isResultOpen}>
+      <Modal isOpen={isResultOpen} onClose={!isResultOpen} isCentered size={'xl'}>
         <ModalOverlay />
         <ModalContent>
           <ModalCloseButton onClick={() => {setIsResultOpen(false)}}/>
           <ModalHeader>Your result:</ModalHeader>
-          <ModalBody>
+          <ModalBody minHeight={'50px'}>
             Result: {mark}%
             <Spacer />
             {mark >= 50 ? (
