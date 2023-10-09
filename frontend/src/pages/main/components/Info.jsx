@@ -27,7 +27,7 @@ const Info = () => {
   return (
     <Box p={6} boxShadow="md" borderRadius="lg" textAlign="center">
       <Text fontSize="2xl" fontWeight="bold" mb={2}>
-        {getGreeting()}, {user.name} 😀
+        {getGreeting()}, {user.name}!
       </Text>
       <Stack direction="column" align="center">
         <Text fontSize="lg" fontWeight="semibold">
