@@ -1,5 +1,5 @@
-# Everyone Class (A STEM verison of Google Classroom)
+# Everyone Class: Empowering STEM Education
 
-## Welcome to our open sourced tool
+## Welcome to our Open-Sourced Learning Platform
 
-### If you are interested in helping our cause, feel free to give us a star and contribute by submitting PRs which our CTO or Senior SWE will review :)
+### We extend a warm welcome to all enthusiasts and collaborators. If you're passionate about advancing education, kindly show your support by giving us a star and consider contributing by submitting pull requests (PRs). Our Chief Technology Officer (CTO) and Senior Software Engineers (SWE) will diligently review your contributions.
