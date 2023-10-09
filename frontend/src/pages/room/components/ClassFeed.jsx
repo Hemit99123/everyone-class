@@ -63,7 +63,9 @@ const ClassFeed = () => {
           updatedSelectedOptions[nextQuestion.questionId] = null;
         });
       }
-  
+      
+      //console.log("Length of selected options: ") will uncomment later
+      //console.log(updatedSelectedOptions.length) will uncomment later
       return updatedSelectedOptions;
     });
   
@@ -72,6 +74,7 @@ const ClassFeed = () => {
 
   const isLastQuestion = currentQuestionIndex === selectedQuiz?.questions.length - 1;
   const totalQuestions = selectedQuiz?.questions.length;
+  //const isOptionSelected = selectedOptions.length === 0 will uncomment later
 
   const handleOptionChange = (questionId, option, correctAnswer) => {
     // Disable other options for the current question once an option is selected
@@ -184,11 +187,11 @@ const ClassFeed = () => {
       </Text>
       <Box ml={9} display="flex" flexWrap="wrap">
         {quiz.map((item) => (
-          <Box key={item._id} mb="4" mr="4" flexBasis="300px">
-            <Card maxW="sm" minHeight="150px">
+          <Box key={item._id} mb="4" mr="4" /*flexBasis="200px"*/ minWidth={"250px"} w={"30vw"} flexGrow={"1"}>
+            <Card minHeight="150px">
               <CardBody>
                 <Stack mt="0.5" spacing="3">
-                  <Heading size="md">{item.quiz_title}</Heading>
+                  <Heading size="md" overflow="hidden" textOverflow="ellipsis" whiteSpace="nowrap">{item.quiz_title}</Heading>
                   <Text
                     maxW="100%"
                     overflow="hidden"
@@ -217,8 +220,8 @@ const ClassFeed = () => {
       {/* Modal for attempting a quiz */}
            <Modal isOpen={isModalOpen} isCentered>
         <ModalOverlay/>
-        <ModalContent pt={'10px'} minh='fit-content' minw='fit-content'>
-          <ModalHeader>Attempt Quiz</ModalHeader>
+        <ModalContent minh='fit-content' minw='fit-content'>
+          <ModalHeader fontSize={'1.8rem'} marginBottom={"10px"}  borderBottom={"1px"}>Attempt Quiz</ModalHeader>
           <ModalBody>
             {selectedQuiz &&
               selectedQuiz.questions.map((question, index) => (
@@ -226,7 +229,7 @@ const ClassFeed = () => {
                   key={question.questionId}
                   display={index === currentQuestionIndex ? 'block' : 'none'}
                 >
-                  <Text>{question.question}</Text>
+                  <Text marginBottom={"10px"} fontSize={'1.1rem'}>{question.question}</Text>
                   <RadioGroup
                     value={selectedOptions[question.questionId]}
                     pb={'50px'} 
@@ -251,7 +254,7 @@ const ClassFeed = () => {
                       ))}
                     </Stack>
                   </RadioGroup>
-                  {!isLastQuestion && (
+                  {!isLastQuestion && /*isOptionSelected &&*/ (
                     <Button onClick={() => handleNextQuestion(question.correctAnswer)} 
                     mt="auto">
                       Next
@@ -272,8 +275,8 @@ const ClassFeed = () => {
         <ModalOverlay />
         <ModalContent>
           <ModalCloseButton onClick={() => {setIsResultOpen(false)}}/>
-          <ModalHeader>Your result:</ModalHeader>
-          <ModalBody minHeight={'50px'}>
+          <ModalHeader fontSize={"1.3rem"}>Your result:</ModalHeader>
+          <ModalBody minHeight={'50px'} fontSize={"2rem"}>
             Result: {mark}%
             <Spacer />
             {mark >= 50 ? (
