@@ -45,9 +45,8 @@ const ClassFeed = () => {
   const [selectedOptions, setSelectedOptions] = useState({});
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
-  const [mark, setMark] = useState(0);
-  const [isSmallerThan500] = useMediaQuery('(max-width: 500px)');
-  const [chosenOptionsEnable, setChosenOptionsEnable] = useState({});
+  const [mark, setMark] = useState(0)
+  const [isSmallerThan500] = useMediaQuery('(max-width: 500px)')
 
   const handleNextQuestion = () => {
     setSelectedOptions((prevSelectedOptions) => {
@@ -66,29 +65,23 @@ const ClassFeed = () => {
           updatedSelectedOptions[nextQuestion.questionId] = null;
         });
       }
-
-
+      
+      //console.log("Length of selected options: ") will uncomment later
+      //console.log(updatedSelectedOptions.length) will uncomment later
       return updatedSelectedOptions;
     });
-
-    setChosenOptionsEnable({})
+  
     setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
   };
 
-  
-
   const isLastQuestion = currentQuestionIndex === selectedQuiz?.questions.length - 1;
   const totalQuestions = selectedQuiz?.questions.length;
+  //const isOptionSelected = selectedOptions.length === 0 will uncomment later
 
   const handleOptionChange = (questionId, option, correctAnswer) => {
     // Disable other options for the current question once an option is selected
     const updatedSelectedOptions = { [questionId]: option };
     setSelectedOptions((prevSelectedOptions) => ({
-      ...prevSelectedOptions,
-      ...updatedSelectedOptions,
-    }));
-
-    setChosenOptionsEnable((prevSelectedOptions) => ({
       ...prevSelectedOptions,
       ...updatedSelectedOptions,
     }));
@@ -264,10 +257,10 @@ const ClassFeed = () => {
                           </Radio>
                         ))}
                       </Stack>
-                    </RadioGroup> 
-                    {!isLastQuestion && (
+                    </RadioGroup>
+                    {!isLastQuestion && /*isOptionSelected &&*/ (
                       <Button onClick={() => handleNextQuestion(question.correctAnswer)} 
-                      mt="auto" isDisabled={Object.keys(chosenOptionsEnable).length == 0}> 
+                      mt="auto">
                         Next
                       </Button>
                     )}
@@ -276,7 +269,7 @@ const ClassFeed = () => {
             </ModalBody>
             <ModalFooter>
               {isLastQuestion && (
-                <Button onClick={() => viewResult(handleCloseModal)} isDisabled={Object.keys(chosenOptionsEnable).length == 0}>View Results</Button>
+                <Button onClick={() => viewResult(handleCloseModal)}>View Results</Button>
               )}
             </ModalFooter>
           </ModalContent>
